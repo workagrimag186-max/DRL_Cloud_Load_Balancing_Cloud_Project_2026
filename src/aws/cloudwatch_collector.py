@@ -261,7 +261,7 @@ def _get_arrival_rate() -> float:
         resp = cw.get_metric_statistics(
             Namespace="AWS/ApplicationELB",
             MetricName="RequestCount",
-            Dimensions=[{"Name": "TargetGroup", "Value": TG_ARN.split(":")[-1]}],
+            Dimensions=[{"Name": "LoadBalancer", "Value": boto3.client("ssm", region_name=REGION).get_parameter(Name="/flashbalanceai/alb/alb-arn")["Parameter"]["Value"].split("loadbalancer/")[1]}],
             StartTime=start_time,
             EndTime=end_time,
             Period=60,
@@ -408,6 +408,17 @@ def lambda_handler(event, context):
             f"State vector length is {len(state_vector)}, expected 23"
 
         result = _write_state_to_dynamo(SESSION_ID, state_vector, metadata)
+
+        # Trigger Inference Coordinator asynchronously
+        try:
+            lam = boto3.client("lambda", region_name="us-east-1")
+            lam.invoke(
+                FunctionName="FlashBalanceAI-InferenceCoordinator",
+                InvocationType="Event",
+                Payload=json.dumps({"state_pk": result["pk"], "state_sk": result["sk"]})
+            )
+        except Exception as e:
+            print(f"Failed to trigger InferenceCoordinator: {e}")
 
         response = {
             "statusCode": 200,

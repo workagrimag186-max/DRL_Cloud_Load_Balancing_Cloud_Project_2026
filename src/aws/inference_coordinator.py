@@ -69,6 +69,7 @@ def lambda_handler(event, context):
     except urllib.error.URLError as e:
         return {"statusCode": 502, "body": json.dumps({"error": f"Failed to reach inference server: {e}"})}
         
+    print("EC2 returned:", result)
     action = result.get("action")
     if action is None:
         return {"statusCode": 500, "body": json.dumps({"error": "Invalid response from server"})}
@@ -85,9 +86,12 @@ def lambda_handler(event, context):
         "state_sk": latest_state["sk"], # Link back to the state used
         "latency_ms": int((time.time() - start_time) * 1000)
     }
+    print("Writing to DynamoDB:", item["pk"], item["sk"])
     table.put_item(Item=item)
+    print("DynamoDB write complete.")
     
     # 4. Trigger ScalingTrigger asynchronously
+    print("Invoking ScalingTrigger...")
     try:
         lam = boto3.client("lambda", region_name=REGION)
         lam.invoke(
@@ -95,6 +99,7 @@ def lambda_handler(event, context):
             InvocationType="Event",
             Payload=json.dumps({"action": action})
         )
+        print("ScalingTrigger invoked.")
     except Exception as e:
         print(f"Failed to trigger ScalingTrigger: {e}")
     
