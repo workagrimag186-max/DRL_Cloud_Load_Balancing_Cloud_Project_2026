@@ -1057,12 +1057,12 @@ Systematically vary reward weights (w1, w2, w3, w4) and retrain PPO (500k steps 
 **Owner/Role:** Devkanti Sarkar
 
 **Tasks:**
-- [ ] Fig 1: P95 latency comparison bar chart (E1–E4) with error bars — all 6 agents
-- [ ] Fig 2: Throughput vs burst multiplier line chart
-- [ ] Fig 3: SLA violation rate grouped bar chart
-- [ ] Fig 4: Reward convergence curves (PPO vs DQN training)
-- [ ] Fig 5: Reward weight ablation heatmap (E10)
-- [ ] Save all figures to `experiments/results/figures/` as 300 dpi PNG and PDF
+- [x] Fig 1: P95 latency comparison bar chart (E1–E4) with error bars — all 6 agents
+- [x] Fig 2: Throughput vs burst multiplier line chart
+- [x] Fig 3: SLA violation rate grouped bar chart
+- [x] Fig 4: Reward convergence curves (PPO vs DQN training)
+- [x] Fig 5: Reward weight ablation heatmap (E10)
+- [x] Save all figures to `experiments/results/figures/` as 300 dpi PNG and PDF
 
 **Acceptance Criteria:** All 5 figures generated without errors, PDF format suitable for paper submission.
 
