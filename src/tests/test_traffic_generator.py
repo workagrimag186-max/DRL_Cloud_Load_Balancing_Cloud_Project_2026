@@ -118,3 +118,51 @@ class TestFromConfig:
         gen = TrafficGenerator.from_config("e6_noisy")
         assert gen.burst_multiplier == 2.0
         assert gen.noise_std_fraction == 0.40
+
+    def test_from_config_e9_triangular(self):
+        gen = TrafficGenerator.from_config("e9_triangular")
+        assert gen.burst_multiplier == 10.0
+        assert gen.burst_shape == "triangular"
+        profile = gen.generate()
+        assert profile.shape == (TOTAL_STEPS,)
+
+    def test_from_config_e9_transfer(self):
+        gen = TrafficGenerator.from_config("e9_transfer")
+        assert gen.burst_multiplier == 10.0
+        assert gen.burst_shape == "triangular"
+
+
+# ── Triangular burst tests (Issue #33 Experiment E9) ───────────────
+
+class TestTriangularBurst:
+
+    def test_triangular_burst_shape_and_length(self):
+        gen = TrafficGenerator(burst_multiplier=10.0, burst_shape="triangular", seed=44)
+        profile = gen.generate()
+        assert profile.shape == (TOTAL_STEPS,)
+        assert np.all(profile >= 0.0)
+
+    def test_triangular_burst_apex_and_baseline(self):
+        """Apex reaches 1000 rps ± 5% and warmup is ~100 rps."""
+        gen = TrafficGenerator(burst_multiplier=10.0, noise_std_fraction=0.0, burst_shape="triangular", seed=44)
+        profile = gen.generate()
+        # Warmup is 1200 steps
+        assert np.allclose(profile[:1200], 100.0)
+        # Apex is at step 4200 (1200 + 3000)
+        apex_val = profile[4200]
+        expected_peak = 1000.0
+        assert abs(apex_val - expected_peak) / expected_peak < 0.05
+        # Post-burst is at baseline
+        assert np.allclose(profile[7200:], 100.0)
+
+    def test_triangular_burst_ramp_dynamics(self):
+        """Profile increases monotonically up to apex, then decreases monotonically."""
+        gen = TrafficGenerator(burst_multiplier=10.0, noise_std_fraction=0.0, burst_shape="triangular", seed=44)
+        profile = gen.generate()
+        # Ramp up: steps 1200 to 4200
+        ramp_up = profile[1200:4200]
+        assert np.all(np.diff(ramp_up) >= 0)
+        # Ramp down: steps 4200 to 7200
+        ramp_down = profile[4200:7200]
+        assert np.all(np.diff(ramp_down) <= 0)
+

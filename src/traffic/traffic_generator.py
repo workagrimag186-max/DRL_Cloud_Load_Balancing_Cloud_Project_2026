@@ -44,6 +44,7 @@ class TrafficGenerator:
         spike_onset_steps: int = 100,
         peak_steps: int = 3000,
         cooldown_steps: int = 3000,
+        burst_shape: str = "exponential",
     ):
         self.burst_multiplier = burst_multiplier
         self.noise_std_fraction = noise_std_fraction
@@ -54,6 +55,7 @@ class TrafficGenerator:
         self.spike_onset_steps = spike_onset_steps
         self.peak_steps = peak_steps
         self.cooldown_steps = cooldown_steps
+        self.burst_shape = burst_shape.lower()
 
         self.total_steps = (
             warmup_steps + pre_burst_steps + spike_onset_steps
@@ -75,26 +77,37 @@ class TrafficGenerator:
         # --- Phase 1: Warmup (constant baseline) ---
         warmup = np.full(self.warmup_steps, self.baseline_rps)
 
-        # --- Phase 2: Pre-burst (constant 3× baseline) ---
-        pre_burst = np.full(self.pre_burst_steps, pre_burst_rate)
+        if self.burst_shape == "triangular":
+            # --- Triangular Burst: Linear ramp-up from baseline to peak, then linear ramp-down back to baseline ---
+            ramp_up_steps = min(self.peak_steps, (self.total_steps - self.warmup_steps) // 2)
+            ramp_down_steps = min(self.cooldown_steps, (self.total_steps - self.warmup_steps) // 2)
+            remaining_steps = self.total_steps - (self.warmup_steps + ramp_up_steps + ramp_down_steps)
 
-        # --- Phase 3: Spike onset (linear ramp from pre-burst to peak) ---
-        spike_onset = np.linspace(pre_burst_rate, peak_rate, self.spike_onset_steps)
+            ramp_up = np.linspace(self.baseline_rps, peak_rate, ramp_up_steps, endpoint=False)
+            ramp_down = np.linspace(peak_rate, self.baseline_rps, ramp_down_steps, endpoint=False)
+            post_burst = np.full(remaining_steps, self.baseline_rps) if remaining_steps > 0 else np.array([])
+            profile = np.concatenate([warmup, ramp_up, ramp_down, post_burst])[:self.total_steps]
+        else:
+            # --- Phase 2: Pre-burst (constant 3× baseline) ---
+            pre_burst = np.full(self.pre_burst_steps, pre_burst_rate)
 
-        # --- Phase 4: Peak (constant at peak rate) ---
-        peak = np.full(self.peak_steps, peak_rate)
+            # --- Phase 3: Spike onset (linear ramp from pre-burst to peak) ---
+            spike_onset = np.linspace(pre_burst_rate, peak_rate, self.spike_onset_steps)
 
-        # --- Phase 5: Cooldown (exponential decay back to baseline) ---
-        # Solve for τ so that the last step ≈ baseline_rps:
-        #   peak_rate * exp(-cooldown_steps / τ) ≈ baseline_rps
-        #   τ = cooldown_steps / ln(peak_rate / baseline_rps)
-        ratio = max(peak_rate / self.baseline_rps, 1.001)  # avoid log(1)
-        tau = self.cooldown_steps / np.log(ratio)
-        t_cool = np.arange(self.cooldown_steps)
-        cooldown = self.baseline_rps + (peak_rate - self.baseline_rps) * np.exp(-t_cool / tau)
+            # --- Phase 4: Peak (constant at peak rate) ---
+            peak = np.full(self.peak_steps, peak_rate)
 
-        # --- Concatenate ---
-        profile = np.concatenate([warmup, pre_burst, spike_onset, peak, cooldown])
+            # --- Phase 5: Cooldown (exponential decay back to baseline) ---
+            # Solve for τ so that the last step ≈ baseline_rps:
+            #   peak_rate * exp(-cooldown_steps / τ) ≈ baseline_rps
+            #   τ = cooldown_steps / ln(peak_rate / baseline_rps)
+            ratio = max(peak_rate / self.baseline_rps, 1.001)  # avoid log(1)
+            tau = self.cooldown_steps / np.log(ratio)
+            t_cool = np.arange(self.cooldown_steps)
+            cooldown = self.baseline_rps + (peak_rate - self.baseline_rps) * np.exp(-t_cool / tau)
+
+            # --- Concatenate ---
+            profile = np.concatenate([warmup, pre_burst, spike_onset, peak, cooldown])
 
         # --- Add Gaussian noise ---
         noise = rng.normal(0, self.noise_std_fraction * profile)
@@ -144,4 +157,5 @@ class TrafficGenerator:
             spike_onset_steps=cfg.get("spike_onset_steps", 100),
             peak_steps=cfg.get("peak_steps", 3000),
             cooldown_steps=cfg.get("cooldown_steps", 3000),
+            burst_shape=scenario.get("burst_shape", "exponential"),
         )
