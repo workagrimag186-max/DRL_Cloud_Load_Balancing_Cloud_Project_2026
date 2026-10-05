@@ -46,3 +46,14 @@ scenarios:
     burst_multiplier: 10.0
     noise_std_fraction: 0.10
     seed: 43
+  e9_triangular:
+    burst_multiplier: 10.0
+    noise_std_fraction: 0.10
+    burst_shape: triangular
+    seed: 44
+  e9_transfer:
+    burst_multiplier: 10.0
+    noise_std_fraction: 0.10
+    burst_shape: triangular
+    seed: 44
+

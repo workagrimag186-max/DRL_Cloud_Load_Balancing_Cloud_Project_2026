@@ -25,6 +25,7 @@ SCENARIOS = {
     "e3_50x":      "E3 — 50× Burst",
     "e4_100x":     "E4 — 100× Burst",
     "e6_noisy":    "E6 — Noisy (2×, 40% noise)",
+    "e9_triangular": "E9 — Triangular Burst (Unseen Profile, 10×)",
 }
 
 OUT_DIR = _root_dir / "experiments" / "results" / "traffic_profiles"
