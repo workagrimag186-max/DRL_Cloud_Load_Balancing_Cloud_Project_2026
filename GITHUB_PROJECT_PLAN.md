@@ -1099,9 +1099,9 @@ Systematically vary reward weights (w1, w2, w3, w4) and retrain PPO (500k steps 
 **Owner/Role:** [4th member]
 
 **Tasks:**
-- [ ] Run all 4 notebooks with final data and clear all previous outputs
-- [ ] Re-execute `01_traffic_analysis.ipynb`, `02_ppo_training.ipynb`, `03_results_analysis.ipynb`, `04_ablation_study.ipynb` from top to bottom
-- [ ] Commit final executed notebooks with outputs to `feature/agrimagupta`
+- [x] Run all 4 notebooks with final data and clear all previous outputs
+- [x] Re-execute `01_traffic_analysis.ipynb`, `02_ppo_training.ipynb`, `03_results_analysis.ipynb`, `04_ablation_study.ipynb` from top to bottom
+- [x] Commit final executed notebooks with outputs to `feature/agrimagupta`
 
 **Acceptance Criteria:** All notebooks execute with 0 errors and committed outputs match figures in `experiments/results/figures/`.
 

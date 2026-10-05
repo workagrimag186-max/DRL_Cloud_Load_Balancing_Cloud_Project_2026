@@ -412,7 +412,7 @@ def generate_ablation_bar_chart(
 
     # 4. Server Utilization Imbalance (std across backends)
     axes[1, 1].bar(labels, cpu_stds, color=colors, edgecolor="black", alpha=0.85)
-    axes[1, 1].set_ylabel("CPU Util Imbalance ($\sigma_{util}$)", fontsize=11, fontweight="bold")
+    axes[1, 1].set_ylabel(r"CPU Util Imbalance ($\sigma_{util}$)", fontsize=11, fontweight="bold")
     axes[1, 1].set_title("D. Backend Load Imbalance (Lowest is Best)", fontsize=12, fontweight="bold")
     axes[1, 1].grid(axis="y", linestyle="--", alpha=0.3)
     for i, v in enumerate(cpu_stds):
