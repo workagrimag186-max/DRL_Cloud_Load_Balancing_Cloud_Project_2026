@@ -1,0 +1,101 @@
+seed,split,range_group,purpose,target_scenario,repetition_index,description
+42,train,42-111,Primary Training Seed (seed_train),FlashSaleEnv-train,1,Master random seed for PPO and DQN training environments (configs/ppo_config.yaml & dqn_config.yaml)
+43,train,42-111,Vectorised Env Worker 1,FlashSaleEnv-train,2,PPO parallel DummyVecEnv sub-environment worker 1 initialization seed (seed_train + 1)
+44,train,42-111,Vectorised Env Worker 2,FlashSaleEnv-train,3,PPO parallel DummyVecEnv sub-environment worker 2 initialization seed (seed_train + 2)
+45,train,42-111,Vectorised Env Worker 3,FlashSaleEnv-train,4,PPO parallel DummyVecEnv sub-environment worker 3 initialization seed (seed_train + 3)
+46,train,42-111,Training Rollout & Seed Exploration,FlashSaleEnv-train,5,Rollout trajectory exploration and environment stochasticity seed for training iterations (run 1)
+47,train,42-111,Training Rollout & Seed Exploration,FlashSaleEnv-train,6,Rollout trajectory exploration and environment stochasticity seed for training iterations (run 2)
+48,train,42-111,Training Rollout & Seed Exploration,FlashSaleEnv-train,7,Rollout trajectory exploration and environment stochasticity seed for training iterations (run 3)
+49,train,42-111,Training Rollout & Seed Exploration,FlashSaleEnv-train,8,Rollout trajectory exploration and environment stochasticity seed for training iterations (run 4)
+50,train,42-111,Training Rollout & Seed Exploration,FlashSaleEnv-train,9,Rollout trajectory exploration and environment stochasticity seed for training iterations (run 5)
+51,train,42-111,Training Rollout & Seed Exploration,FlashSaleEnv-train,10,Rollout trajectory exploration and environment stochasticity seed for training iterations (run 6)
+52,train,42-111,Training Rollout & Seed Exploration,FlashSaleEnv-train,11,Rollout trajectory exploration and environment stochasticity seed for training iterations (run 7)
+53,train,42-111,Training Rollout & Seed Exploration,FlashSaleEnv-train,12,Rollout trajectory exploration and environment stochasticity seed for training iterations (run 8)
+54,train,42-111,Training Rollout & Seed Exploration,FlashSaleEnv-train,13,Rollout trajectory exploration and environment stochasticity seed for training iterations (run 9)
+55,train,42-111,Training Rollout & Seed Exploration,FlashSaleEnv-train,14,Rollout trajectory exploration and environment stochasticity seed for training iterations (run 10)
+56,train,42-111,Training Rollout & Seed Exploration,FlashSaleEnv-train,15,Rollout trajectory exploration and environment stochasticity seed for training iterations (run 11)
+57,train,42-111,Training Rollout & Seed Exploration,FlashSaleEnv-train,16,Rollout trajectory exploration and environment stochasticity seed for training iterations (run 12)
+58,train,42-111,Training Rollout & Seed Exploration,FlashSaleEnv-train,17,Rollout trajectory exploration and environment stochasticity seed for training iterations (run 13)
+59,train,42-111,Training Rollout & Seed Exploration,FlashSaleEnv-train,18,Rollout trajectory exploration and environment stochasticity seed for training iterations (run 14)
+60,train,42-111,Training Rollout & Seed Exploration,FlashSaleEnv-train,19,Rollout trajectory exploration and environment stochasticity seed for training iterations (run 15)
+61,train,42-111,Training Rollout & Seed Exploration,FlashSaleEnv-train,20,Rollout trajectory exploration and environment stochasticity seed for training iterations (run 16)
+62,train,42-111,Training Rollout & Seed Exploration,FlashSaleEnv-train,21,Rollout trajectory exploration and environment stochasticity seed for training iterations (run 17)
+63,train,42-111,Training Rollout & Seed Exploration,FlashSaleEnv-train,22,Rollout trajectory exploration and environment stochasticity seed for training iterations (run 18)
+64,train,42-111,Training Rollout & Seed Exploration,FlashSaleEnv-train,23,Rollout trajectory exploration and environment stochasticity seed for training iterations (run 19)
+65,train,42-111,Training Rollout & Seed Exploration,FlashSaleEnv-train,24,Rollout trajectory exploration and environment stochasticity seed for training iterations (run 20)
+66,train,42-111,Training Rollout & Seed Exploration,FlashSaleEnv-train,25,Rollout trajectory exploration and environment stochasticity seed for training iterations (run 21)
+67,train,42-111,Training Rollout & Seed Exploration,FlashSaleEnv-train,26,Rollout trajectory exploration and environment stochasticity seed for training iterations (run 22)
+68,train,42-111,Training Rollout & Seed Exploration,FlashSaleEnv-train,27,Rollout trajectory exploration and environment stochasticity seed for training iterations (run 23)
+69,train,42-111,Training Rollout & Seed Exploration,FlashSaleEnv-train,28,Rollout trajectory exploration and environment stochasticity seed for training iterations (run 24)
+70,train,42-111,Training Rollout & Seed Exploration,FlashSaleEnv-train,29,Rollout trajectory exploration and environment stochasticity seed for training iterations (run 25)
+71,train,42-111,Training Rollout & Seed Exploration,FlashSaleEnv-train,30,Rollout trajectory exploration and environment stochasticity seed for training iterations (run 26)
+72,train,42-111,Training Rollout & Seed Exploration,FlashSaleEnv-train,31,Rollout trajectory exploration and environment stochasticity seed for training iterations (run 27)
+73,train,42-111,Training Rollout & Seed Exploration,FlashSaleEnv-train,32,Rollout trajectory exploration and environment stochasticity seed for training iterations (run 28)
+74,train,42-111,Training Rollout & Seed Exploration,FlashSaleEnv-train,33,Rollout trajectory exploration and environment stochasticity seed for training iterations (run 29)
+75,train,42-111,Training Rollout & Seed Exploration,FlashSaleEnv-train,34,Rollout trajectory exploration and environment stochasticity seed for training iterations (run 30)
+76,train,42-111,Training Rollout & Seed Exploration,FlashSaleEnv-train,35,Rollout trajectory exploration and environment stochasticity seed for training iterations (run 31)
+77,train,42-111,Training Rollout & Seed Exploration,FlashSaleEnv-train,36,Rollout trajectory exploration and environment stochasticity seed for training iterations (run 32)
+78,train,42-111,Training Rollout & Seed Exploration,FlashSaleEnv-train,37,Rollout trajectory exploration and environment stochasticity seed for training iterations (run 33)
+79,train,42-111,Training Rollout & Seed Exploration,FlashSaleEnv-train,38,Rollout trajectory exploration and environment stochasticity seed for training iterations (run 34)
+80,train,42-111,Training Rollout & Seed Exploration,FlashSaleEnv-train,39,Rollout trajectory exploration and environment stochasticity seed for training iterations (run 35)
+81,train,42-111,Training Rollout & Seed Exploration,FlashSaleEnv-train,40,Rollout trajectory exploration and environment stochasticity seed for training iterations (run 36)
+82,train,42-111,Training Rollout & Seed Exploration,FlashSaleEnv-train,41,Rollout trajectory exploration and environment stochasticity seed for training iterations (run 37)
+83,train,42-111,Training Rollout & Seed Exploration,FlashSaleEnv-train,42,Rollout trajectory exploration and environment stochasticity seed for training iterations (run 38)
+84,train,42-111,Training Rollout & Seed Exploration,FlashSaleEnv-train,43,Rollout trajectory exploration and environment stochasticity seed for training iterations (run 39)
+85,train,42-111,Training Rollout & Seed Exploration,FlashSaleEnv-train,44,Rollout trajectory exploration and environment stochasticity seed for training iterations (run 40)
+86,train,42-111,Training Rollout & Seed Exploration,FlashSaleEnv-train,45,Rollout trajectory exploration and environment stochasticity seed for training iterations (run 41)
+87,train,42-111,Training Rollout & Seed Exploration,FlashSaleEnv-train,46,Rollout trajectory exploration and environment stochasticity seed for training iterations (run 42)
+88,train,42-111,Training Rollout & Seed Exploration,FlashSaleEnv-train,47,Rollout trajectory exploration and environment stochasticity seed for training iterations (run 43)
+89,train,42-111,Training Rollout & Seed Exploration,FlashSaleEnv-train,48,Rollout trajectory exploration and environment stochasticity seed for training iterations (run 44)
+90,train,42-111,Training Rollout & Seed Exploration,FlashSaleEnv-train,49,Rollout trajectory exploration and environment stochasticity seed for training iterations (run 45)
+91,train,42-111,Training Rollout & Seed Exploration,FlashSaleEnv-train,50,Rollout trajectory exploration and environment stochasticity seed for training iterations (run 46)
+92,train,42-111,Training Rollout & Seed Exploration,FlashSaleEnv-train,51,Rollout trajectory exploration and environment stochasticity seed for training iterations (run 47)
+93,train,42-111,Training Rollout & Seed Exploration,FlashSaleEnv-train,52,Rollout trajectory exploration and environment stochasticity seed for training iterations (run 48)
+94,train,42-111,Training Rollout & Seed Exploration,FlashSaleEnv-train,53,Rollout trajectory exploration and environment stochasticity seed for training iterations (run 49)
+95,train,42-111,Training Rollout & Seed Exploration,FlashSaleEnv-train,54,Rollout trajectory exploration and environment stochasticity seed for training iterations (run 50)
+96,train,42-111,Training Rollout & Seed Exploration,FlashSaleEnv-train,55,Rollout trajectory exploration and environment stochasticity seed for training iterations (run 51)
+97,train,42-111,Training Rollout & Seed Exploration,FlashSaleEnv-train,56,Rollout trajectory exploration and environment stochasticity seed for training iterations (run 52)
+98,train,42-111,Training Rollout & Seed Exploration,FlashSaleEnv-train,57,Rollout trajectory exploration and environment stochasticity seed for training iterations (run 53)
+99,train,42-111,Training Rollout & Seed Exploration,FlashSaleEnv-train,58,Rollout trajectory exploration and environment stochasticity seed for training iterations (run 54)
+100,train,42-111,Training Rollout & Seed Exploration,FlashSaleEnv-train,59,Rollout trajectory exploration and environment stochasticity seed for training iterations (run 55)
+101,train,42-111,Training Rollout & Seed Exploration,FlashSaleEnv-train,60,Rollout trajectory exploration and environment stochasticity seed for training iterations (run 56)
+102,train,42-111,Training Rollout & Seed Exploration,FlashSaleEnv-train,61,Rollout trajectory exploration and environment stochasticity seed for training iterations (run 57)
+103,train,42-111,Training Rollout & Seed Exploration,FlashSaleEnv-train,62,Rollout trajectory exploration and environment stochasticity seed for training iterations (run 58)
+104,train,42-111,Training Rollout & Seed Exploration,FlashSaleEnv-train,63,Rollout trajectory exploration and environment stochasticity seed for training iterations (run 59)
+105,train,42-111,Training Rollout & Seed Exploration,FlashSaleEnv-train,64,Rollout trajectory exploration and environment stochasticity seed for training iterations (run 60)
+106,train,42-111,Training Rollout & Seed Exploration,FlashSaleEnv-train,65,Rollout trajectory exploration and environment stochasticity seed for training iterations (run 61)
+107,train,42-111,Training Rollout & Seed Exploration,FlashSaleEnv-train,66,Rollout trajectory exploration and environment stochasticity seed for training iterations (run 62)
+108,train,42-111,Training Rollout & Seed Exploration,FlashSaleEnv-train,67,Rollout trajectory exploration and environment stochasticity seed for training iterations (run 63)
+109,train,42-111,Training Rollout & Seed Exploration,FlashSaleEnv-train,68,Rollout trajectory exploration and environment stochasticity seed for training iterations (run 64)
+110,train,42-111,Training Rollout & Seed Exploration,FlashSaleEnv-train,69,Rollout trajectory exploration and environment stochasticity seed for training iterations (run 65)
+111,train,42-111,Training Rollout & Seed Exploration,FlashSaleEnv-train,70,Rollout trajectory exploration and environment stochasticity seed for training iterations (run 66)
+112,val,112-126,Validation & Local Evaluation Gate,e1_baseline,1,"Validation set seed 112 for EvalCallback checkpoint selection and pre-AWS local gate (src/evaluation/local_gate.py VALIDATION_SEEDS, rotation across e1_baseline)"
+113,val,112-126,Validation & Local Evaluation Gate,e2_10x,2,"Validation set seed 113 for EvalCallback checkpoint selection and pre-AWS local gate (src/evaluation/local_gate.py VALIDATION_SEEDS, rotation across e2_10x)"
+114,val,112-126,Validation & Local Evaluation Gate,e3_50x,3,"Validation set seed 114 for EvalCallback checkpoint selection and pre-AWS local gate (src/evaluation/local_gate.py VALIDATION_SEEDS, rotation across e3_50x)"
+115,val,112-126,Validation & Local Evaluation Gate,e4_100x,4,"Validation set seed 115 for EvalCallback checkpoint selection and pre-AWS local gate (src/evaluation/local_gate.py VALIDATION_SEEDS, rotation across e4_100x)"
+116,val,112-126,Validation & Local Evaluation Gate,e6_noisy,5,"Validation set seed 116 for EvalCallback checkpoint selection and pre-AWS local gate (src/evaluation/local_gate.py VALIDATION_SEEDS, rotation across e6_noisy)"
+117,val,112-126,Validation & Local Evaluation Gate,e1_baseline,6,"Validation set seed 117 for EvalCallback checkpoint selection and pre-AWS local gate (src/evaluation/local_gate.py VALIDATION_SEEDS, rotation across e1_baseline)"
+118,val,112-126,Validation & Local Evaluation Gate,e2_10x,7,"Validation set seed 118 for EvalCallback checkpoint selection and pre-AWS local gate (src/evaluation/local_gate.py VALIDATION_SEEDS, rotation across e2_10x)"
+119,val,112-126,Validation & Local Evaluation Gate,e3_50x,8,"Validation set seed 119 for EvalCallback checkpoint selection and pre-AWS local gate (src/evaluation/local_gate.py VALIDATION_SEEDS, rotation across e3_50x)"
+120,val,112-126,Validation & Local Evaluation Gate,e4_100x,9,"Validation set seed 120 for EvalCallback checkpoint selection and pre-AWS local gate (src/evaluation/local_gate.py VALIDATION_SEEDS, rotation across e4_100x)"
+121,val,112-126,Validation & Local Evaluation Gate,e6_noisy,10,"Validation set seed 121 for EvalCallback checkpoint selection and pre-AWS local gate (src/evaluation/local_gate.py VALIDATION_SEEDS, rotation across e6_noisy)"
+122,val,112-126,Validation & Local Evaluation Gate,e1_baseline,11,"Validation set seed 122 for EvalCallback checkpoint selection and pre-AWS local gate (src/evaluation/local_gate.py VALIDATION_SEEDS, rotation across e1_baseline)"
+123,val,112-126,Validation & Local Evaluation Gate,e2_10x,12,"Validation set seed 123 for EvalCallback checkpoint selection and pre-AWS local gate (src/evaluation/local_gate.py VALIDATION_SEEDS, rotation across e2_10x)"
+124,val,112-126,Validation & Local Evaluation Gate,e3_50x,13,"Validation set seed 124 for EvalCallback checkpoint selection and pre-AWS local gate (src/evaluation/local_gate.py VALIDATION_SEEDS, rotation across e3_50x)"
+125,val,112-126,Validation & Local Evaluation Gate,e4_100x,14,"Validation set seed 125 for EvalCallback checkpoint selection and pre-AWS local gate (src/evaluation/local_gate.py VALIDATION_SEEDS, rotation across e4_100x)"
+126,val,112-126,Validation & Local Evaluation Gate,e6_noisy,15,"Validation set seed 126 for EvalCallback checkpoint selection and pre-AWS local gate (src/evaluation/local_gate.py VALIDATION_SEEDS, rotation across e6_noisy)"
+127,test,127-141,Experiment E1: Baseline 1x Traffic Evaluation,e1_baseline,1,"E1 baseline evaluation repetition 1 (PRD §24 Issue #25, 5 reps test seeds 127-131)"
+128,test,127-141,Experiment E1: Baseline 1x Traffic Evaluation,e1_baseline,2,"E1 baseline evaluation repetition 2 (PRD §24 Issue #25, 5 reps test seeds 127-131)"
+129,test,127-141,Experiment E1: Baseline 1x Traffic Evaluation,e1_baseline,3,"E1 baseline evaluation repetition 3 (PRD §24 Issue #25, 5 reps test seeds 127-131)"
+130,test,127-141,Experiment E1: Baseline 1x Traffic Evaluation,e1_baseline,4,"E1 baseline evaluation repetition 4 (PRD §24 Issue #25, 5 reps test seeds 127-131)"
+131,test,127-141,Experiment E1: Baseline 1x Traffic Evaluation,e1_baseline,5,"E1 baseline evaluation repetition 5 (PRD §24 Issue #25, 5 reps test seeds 127-131)"
+132,test,127-141,Experiment E2: 10x Flash-Sale Burst Evaluation (Core Hypothesis),e2_10x,1,E2 10x burst evaluation repetition 1 for primary PPO vs RR t-test / Wilcoxon validation (PRD §24 Issue #26)
+133,test,127-141,Experiment E2: 10x Flash-Sale Burst Evaluation (Core Hypothesis),e2_10x,2,E2 10x burst evaluation repetition 2 for primary PPO vs RR t-test / Wilcoxon validation (PRD §24 Issue #26)
+134,test,127-141,Experiment E2: 10x Flash-Sale Burst Evaluation (Core Hypothesis),e2_10x,3,E2 10x burst evaluation repetition 3 for primary PPO vs RR t-test / Wilcoxon validation (PRD §24 Issue #26)
+135,test,127-141,Experiment E2: 10x Flash-Sale Burst Evaluation (Core Hypothesis),e2_10x,4,E2 10x burst evaluation repetition 4 for primary PPO vs RR t-test / Wilcoxon validation (PRD §24 Issue #26)
+136,test,127-141,Experiment E2: 10x Flash-Sale Burst Evaluation (Core Hypothesis),e2_10x,5,E2 10x burst evaluation repetition 5 for primary PPO vs RR t-test / Wilcoxon validation (PRD §24 Issue #26)
+137,test,127-141,Experiment E3: 50x Flash-Sale Burst Extreme Stress Test,e3_50x,1,E3 50x burst evaluation repetition 1 for peak throughput and SLA degradation under severe load (Issue #27)
+138,test,127-141,Experiment E3: 50x Flash-Sale Burst Extreme Stress Test,e3_50x,2,E3 50x burst evaluation repetition 2 for peak throughput and SLA degradation under severe load (Issue #27)
+139,test,127-141,Experiment E3: 50x Flash-Sale Burst Extreme Stress Test,e3_50x,3,E3 50x burst evaluation repetition 3 for peak throughput and SLA degradation under severe load (Issue #27)
+140,test,127-141,Experiment E3: 50x Flash-Sale Burst Extreme Stress Test,e3_50x,4,E3 50x burst evaluation repetition 4 for peak throughput and SLA degradation under severe load (Issue #27)
+141,test,127-141,Experiment E3: 50x Flash-Sale Burst Extreme Stress Test,e3_50x,5,E3 50x burst evaluation repetition 5 for peak throughput and SLA degradation under severe load (Issue #27)

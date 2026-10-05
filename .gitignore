@@ -1,4 +1,4 @@
-﻿# ============================================================
+# ============================================================
 # .gitignore — FlashBalanceAI
 # DRL_Cloud_Load_Balancing_Cloud_Project_2026
 # ============================================================
@@ -75,6 +75,12 @@ experiments/analysis/**
 !experiments/results/.gitkeep
 !experiments/analysis/.gitkeep
 !experiments/results/local_gate_results.csv
+!experiments/analysis/seed_manifest.csv
+!experiments/analysis/reproduce_all.sh
+!experiments/analysis/reproduce_all.ps1
+!experiments/analysis/verify_reproduction.py
+!experiments/analysis/statistical_tests.csv
+!experiments/analysis/summary_statistics.csv
 
 # --- AWS / secrets ---
 # NEVER commit credentials, keys, or account-specific values

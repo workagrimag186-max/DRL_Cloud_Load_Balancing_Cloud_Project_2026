@@ -1,9 +1,21 @@
 name: flashbalance
 channels:
-  - defaults
   - conda-forge
+  - defaults
 dependencies:
-  - python=3.11
-  - pip
+  - python=3.11.9
+  - pip=24.0
+  - numpy=1.26.4
+  - pandas=2.2.2
+  - scipy=1.13.0
+  - matplotlib=3.8.4
+  - seaborn=0.13.2
+  - pillow=10.3.0
+  - pyyaml=6.0.1
+  - pytest=8.2.0
+  - flask=3.0.3
+  - boto3=1.34.0
   - pip:
-      - -r requirements.txt
+      - stable-baselines3==2.3.0
+      - gymnasium==0.29.1
+      - torch==2.2.0
