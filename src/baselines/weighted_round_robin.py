@@ -23,8 +23,8 @@ class WeightedRoundRobin:
         weights = [1.0 / (cpu + eps) for cpu in cpu_utils]
         
         # Normalize weights to probabilities
-        total_weight = sum(weights)
-        probs = [w / total_weight for w in weights]
+        probs = np.array(weights, dtype=np.float64)
+        probs /= probs.sum()
         
         # Probabilistic selection acts as a stateless Weighted Round Robin
         selected = np.random.choice(self.num_backends, p=probs)
