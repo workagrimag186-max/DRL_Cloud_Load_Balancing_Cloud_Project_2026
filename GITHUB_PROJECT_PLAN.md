@@ -1036,11 +1036,11 @@ Systematically vary reward weights (w1, w2, w3, w4) and retrain PPO (500k steps 
 **Owner/Role:** Agrima Gupta
 
 **Tasks:**
-- [ ] Load all experiment CSVs from `experiments/results/`
-- [ ] Compute mean ± 95% CI for each metric × agent × experiment
-- [ ] Run paired Student's t-test (PPO vs DQN) and paired Wilcoxon test for non-normal distributions
-- [ ] Record p-values in `experiments/analysis/statistical_tests.csv`
-- [ ] Verify: ≥ 5 reps per cell, 95% CI computed correctly (`±t_{0.975, n-1} × SE`)
+- [x] Load all experiment CSVs from `experiments/results/`
+- [x] Compute mean ± 95% CI for each metric × agent × experiment
+- [x] Run paired Student's t-test (PPO vs DQN) and paired Wilcoxon test for non-normal distributions
+- [x] Record p-values in `experiments/analysis/statistical_tests.csv`
+- [x] Verify: >= 5 reps per cell, 95% CI computed correctly (`±t_{0.975, n-1} × SE`)
 
 **Acceptance Criteria:** `statistical_tests.csv` shows p < 0.05 for PPO vs RR on E2 (primary claim), or paper claims revised if not.
 
