@@ -1079,10 +1079,10 @@ Systematically vary reward weights (w1, w2, w3, w4) and retrain PPO (500k steps 
 **Owner/Role:** Mohar Gorai
 
 **Tasks:**
-- [ ] Document all random seeds used (train: 42–111, val: 112–126, test: 127–141) in `experiments/analysis/seed_manifest.csv`
-- [ ] Write `experiments/analysis/reproduce_all.sh`: end-to-end script that recreates all figures from saved model checkpoints and test seeds
-- [ ] Verify `reproduce_all.sh` produces figures that match originals (within ±2% tolerance)
-- [ ] Pin software versions in `requirements.txt` and `environment.yml`
+- [x] Document all random seeds used (train: 42–111, val: 112–126, test: 127–141) in `experiments/analysis/seed_manifest.csv`
+- [x] Write `experiments/analysis/reproduce_all.sh`: end-to-end script that recreates all figures from saved model checkpoints and test seeds
+- [x] Verify `reproduce_all.sh` produces figures that match originals (within ±2% tolerance)
+- [x] Pin software versions in `requirements.txt` and `environment.yml`
 
 **Acceptance Criteria:** `reproduce_all.sh` runs end-to-end and all figures match originals.
 
