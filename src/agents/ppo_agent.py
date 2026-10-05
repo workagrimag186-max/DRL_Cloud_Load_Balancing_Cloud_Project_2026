@@ -26,9 +26,9 @@ VALIDATION_SEEDS = tuple(range(112, 127))
 class _SeedCyclingFlashSaleEnv(FlashSaleEnv):
     """An evaluation environment that advances through the validation seeds."""
 
-    def __init__(self, seeds: Iterable[int] = VALIDATION_SEEDS) -> None:
+    def __init__(self, seeds: Iterable[int] = VALIDATION_SEEDS, reward_weights: dict | None = None) -> None:
         self._seeds = cycle(seeds)
-        super().__init__()
+        super().__init__(reward_weights=reward_weights)
 
     def reset(self, *, seed: int | None = None, options: dict | None = None):
         return super().reset(seed=next(self._seeds) if seed is None else seed, options=options)
@@ -37,10 +37,16 @@ class _SeedCyclingFlashSaleEnv(FlashSaleEnv):
 class PPOAgent:
     """Owns the PPO model, vectorised environments, callbacks, and evaluation."""
 
-    def __init__(self, config_path: str | Path = DEFAULT_CONFIG_PATH) -> None:
+    def __init__(
+        self,
+        config_path: str | Path = DEFAULT_CONFIG_PATH,
+        config_override: dict[str, Any] | None = None,
+    ) -> None:
         self.config_path = Path(config_path)
         with self.config_path.open(encoding="utf-8") as file:
             self.config: dict[str, Any] = yaml.safe_load(file)
+        if config_override:
+            self.config.update(config_override)
         self.save_dir = PROJECT_ROOT / self.config["save_dir"]
         self.tensorboard_log = PROJECT_ROOT / self.config["tensorboard_log"]
         self.model: PPO | None = None
@@ -51,9 +57,10 @@ class PPOAgent:
 
     def _make_training_env(self, index: int):
         seed = int(self.config["seed_train"]) + index
+        reward_weights = self.config.get("reward_weights")
 
         def factory():
-            env = FlashSaleEnv()
+            env = FlashSaleEnv(reward_weights=reward_weights)
             env.reset(seed=seed)
             return Monitor(env)
 
@@ -65,7 +72,10 @@ class PPOAgent:
                 [self._make_training_env(index) for index in range(int(self.config["n_envs"]))]
             )
         if self.eval_env is None:
-            self.eval_env = DummyVecEnv([lambda: Monitor(_SeedCyclingFlashSaleEnv())])
+            reward_weights = self.config.get("reward_weights")
+            self.eval_env = DummyVecEnv(
+                [lambda: Monitor(_SeedCyclingFlashSaleEnv(reward_weights=reward_weights))]
+            )
 
     def _build_model(self) -> PPO:
         self._build_environments()

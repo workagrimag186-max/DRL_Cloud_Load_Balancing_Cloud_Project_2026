@@ -1,15 +1,16 @@
+import heapq
+import os
 import gymnasium as gym
 from gymnasium import spaces
 import numpy as np
 import yaml
-import os
 
 class SimulatedBackend:
     def __init__(self, max_connections=100, base_latency_ms=50.0):
         self.max_connections = max_connections
         self.base_latency_ms = base_latency_ms
         
-        self.active_requests = []  # [(finish_t, latency_ms)]
+        self.active_requests = []  # heap of [(finish_t, latency_ms)]
         self.queue = []            # [arrival_t]
         self.response_time_ema = base_latency_ms
         self.health_status = 1.0
@@ -32,34 +33,29 @@ class SimulatedBackend:
     def advance_time(self, current_t):
         self.total_processed = 0
         self.sla_violations = 0
-        while self.active_requests:
-            self.active_requests.sort(key=lambda x: x[0])
-            finish_t, lat_ms = self.active_requests[0]
-            if finish_t <= current_t:
-                self.active_requests.pop(0)
-                # Update EMA
-                self.response_time_ema = 0.1 * lat_ms + 0.9 * self.response_time_ema
-                self.total_processed += 1
+        while self.active_requests and self.active_requests[0][0] <= current_t:
+            finish_t, lat_ms = heapq.heappop(self.active_requests)
+            # Update EMA
+            self.response_time_ema = 0.1 * lat_ms + 0.9 * self.response_time_ema
+            self.total_processed += 1
+            
+            if self.queue:
+                arr_t = self.queue.pop(0)
+                cpu = min(1.0, (len(self.active_requests) + 1) / self.max_connections)
+                new_lat_ms = self.base_latency_ms * (1.0 + cpu)
+                new_finish_t = finish_t + new_lat_ms / 1000.0
+                heapq.heappush(self.active_requests, (new_finish_t, new_lat_ms))
                 
-                if self.queue:
-                    arr_t = self.queue.pop(0)
-                    cpu = min(1.0, (len(self.active_requests) + 1) / self.max_connections)
-                    new_lat_ms = self.base_latency_ms * (1.0 + cpu)
-                    new_finish_t = finish_t + new_lat_ms / 1000.0
-                    self.active_requests.append((new_finish_t, new_lat_ms))
-                    
-                    total_time_ms = (new_finish_t - arr_t) * 1000.0
-                    if total_time_ms > 200.0:
-                        self.sla_violations += 1
-            else:
-                break
+                total_time_ms = (new_finish_t - arr_t) * 1000.0
+                if total_time_ms > 200.0:
+                    self.sla_violations += 1
                 
     def route_request(self, current_t):
         if self.active_connections < self.max_connections:
             cpu = min(1.0, (self.active_connections + 1) / self.max_connections)
             lat_ms = self.base_latency_ms * (1.0 + cpu)
             finish_t = current_t + lat_ms / 1000.0
-            self.active_requests.append((finish_t, lat_ms))
+            heapq.heappush(self.active_requests, (finish_t, lat_ms))
             
             if lat_ms > 200.0:
                 self.sla_violations += 1
@@ -72,7 +68,7 @@ class FlashSaleEnv(gym.Env):
     """
     metadata = {"render_modes": ["human"], "render_fps": 10}
     
-    def __init__(self, seed=None, **kwargs):
+    def __init__(self, seed=None, reward_weights=None, **kwargs):
         super(FlashSaleEnv, self).__init__()
         
         # Accept kwargs like render_mode if passed by gym
@@ -90,17 +86,23 @@ class FlashSaleEnv(gym.Env):
         self.step_duration = 0.1  # 100ms
         
         self.weights = {"w_lat": 0.4, "w_util": 0.2, "w_tput": 0.2, "w_sla": 0.2}
-        
-        # Attempt to load from config
-        try:
-            config_path = os.path.join(os.path.dirname(__file__), '../../configs/ppo_config.yaml')
-            if os.path.exists(config_path):
-                with open(config_path, 'r') as f:
-                    config = yaml.safe_load(f)
-                    if config and 'reward_weights' in config:
-                        self.weights = config['reward_weights']
-        except Exception:
-            pass
+        if reward_weights is not None:
+            self.weights = dict(reward_weights)
+        elif "reward_weights" in kwargs:
+            self.weights = dict(kwargs["reward_weights"])
+        elif "weights" in kwargs:
+            self.weights = dict(kwargs["weights"])
+        else:
+            # Attempt to load from config
+            try:
+                config_path = os.path.join(os.path.dirname(__file__), '../../configs/ppo_config.yaml')
+                if os.path.exists(config_path):
+                    with open(config_path, 'r') as f:
+                        config = yaml.safe_load(f)
+                        if config and 'reward_weights' in config:
+                            self.weights = config['reward_weights']
+            except Exception:
+                pass
             
         if seed is not None:
             self.reset(seed=seed)
