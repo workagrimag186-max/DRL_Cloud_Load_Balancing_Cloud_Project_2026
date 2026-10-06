@@ -1246,11 +1246,11 @@ Systematically vary reward weights (w1, w2, w3, w4) and retrain PPO (500k steps 
 **Owner/Role:** Devkanti Sarkar
 
 **Tasks:**
-- [ ] Ensure `main` branch contains all merged work from `develop`
-- [ ] Update `README.md`: project description, architecture diagram, quick-start, team, citation
-- [ ] Create git tag: `git tag -a v1.0 -m "FlashBalanceAI v1.0 — BCSE355L final submission"` and push
-- [ ] Create GitHub Release: attach paper PDF, reproducibility package, final figures
-- [ ] Verify: tag visible on GitHub, release notes complete
+- [x] Ensure `main` branch contains all merged work from `develop`
+- [x] Update `README.md`: project description, architecture diagram, quick-start, team, citation
+- [x] Create git tag: `git tag -a v1.0 -m "FlashBalanceAI v1.0 — BCSE355L final submission"` and push
+- [x] Create GitHub Release: attach paper PDF, reproducibility package, final figures
+- [x] Verify: tag visible on GitHub, release notes complete
 
 **Acceptance Criteria:** `git tag v1.0` pushed to remote; GitHub Release created with all deliverables attached.
 
