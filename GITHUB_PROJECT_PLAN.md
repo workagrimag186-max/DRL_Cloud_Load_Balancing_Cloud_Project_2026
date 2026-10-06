@@ -1227,9 +1227,9 @@ Systematically vary reward weights (w1, w2, w3, w4) and retrain PPO (500k steps 
 **Owner/Role:** Mohar Gorai
 
 **Tasks:**
-- [ ] Complete `src/metrics/visualiser.py` Dash app with live-updating charts for demo
-- [ ] Add side-by-side PPO vs RR routing animation during live JMeter run
-- [ ] Test on a 2-minute JMeter run (E2 scenario, reduced load) before demo day
+- [x] Complete `src/metrics/visualiser.py` Dash app with live-updating charts for demo
+- [x] Add side-by-side PPO vs RR routing animation during live JMeter run
+- [x] Test on a 2-minute JMeter run (E2 scenario, reduced load) before demo day
 
 **Acceptance Criteria:** Dashboard shows live metrics updating every 30s during demo JMeter run.
 
