@@ -1,6 +1,6 @@
 scenario,metric,comparison,n_pairs,t_stat,p_value_ttest,w_stat,p_value_wilcoxon,significant_ttest_05
-e2_10x,mean_latency_ms,PPO vs DQN,6,,,,,False
-e2_10x,mean_latency_ms,PPO vs RR,6,,,,,False
+e2_10x,mean_latency_ms,PPO vs DQN,5,-5.635871218159585,0.004877978069677479,0.0,0.0625,True
+e2_10x,mean_latency_ms,PPO vs RR,5,-18.213172160892466,5.344791555964599e-05,0.0,0.0625,True
 e2_10x,p95_latency_ms,PPO vs DQN,6,-6.523200928212648,0.0012659790325383713,0.0,0.03125,True
 e2_10x,p95_latency_ms,PPO vs RR,6,-3.826888286741419,0.012286561456354239,1.0,0.0625,True
 e2_10x,throughput_rps,PPO vs DQN,6,5.048541459306331,0.003938164942068483,0.0,0.03125,True
