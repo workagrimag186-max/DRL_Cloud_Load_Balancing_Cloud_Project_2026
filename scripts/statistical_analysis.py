@@ -79,13 +79,14 @@ def main():
         for m in metrics:
             if not ppo_data.empty and not dqn_data.empty:
                 merged = pd.merge(ppo_data, dqn_data, on="seed", suffixes=("_ppo", "_dqn"))
-                if len(merged) >= 5:
-                    stat_t, p_t = stats.ttest_rel(merged[f"{m}_ppo"], merged[f"{m}_dqn"])
+                valid_pair = merged[[f"{m}_ppo", f"{m}_dqn"]].dropna()
+                if len(valid_pair) >= 5:
+                    stat_t, p_t = stats.ttest_rel(valid_pair[f"{m}_ppo"], valid_pair[f"{m}_dqn"])
                     
                     with warnings.catch_warnings():
                         warnings.simplefilter("ignore")
                         try:
-                            stat_w, p_w = stats.wilcoxon(merged[f"{m}_ppo"], merged[f"{m}_dqn"])
+                            stat_w, p_w = stats.wilcoxon(valid_pair[f"{m}_ppo"], valid_pair[f"{m}_dqn"])
                         except ValueError:
                             stat_w, p_w = np.nan, np.nan
                             
@@ -93,7 +94,7 @@ def main():
                         "scenario": scenario,
                         "metric": m,
                         "comparison": "PPO vs DQN",
-                        "n_pairs": len(merged),
+                        "n_pairs": len(valid_pair),
                         "t_stat": stat_t,
                         "p_value_ttest": p_t,
                         "w_stat": stat_w,
@@ -103,13 +104,14 @@ def main():
                     
             if not ppo_data.empty and not rr_data.empty:
                 merged = pd.merge(ppo_data, rr_data, on="seed", suffixes=("_ppo", "_rr"))
-                if len(merged) >= 5:
-                    stat_t, p_t = stats.ttest_rel(merged[f"{m}_ppo"], merged[f"{m}_rr"])
+                valid_pair = merged[[f"{m}_ppo", f"{m}_rr"]].dropna()
+                if len(valid_pair) >= 5:
+                    stat_t, p_t = stats.ttest_rel(valid_pair[f"{m}_ppo"], valid_pair[f"{m}_rr"])
                     
                     with warnings.catch_warnings():
                         warnings.simplefilter("ignore")
                         try:
-                            stat_w, p_w = stats.wilcoxon(merged[f"{m}_ppo"], merged[f"{m}_rr"])
+                            stat_w, p_w = stats.wilcoxon(valid_pair[f"{m}_ppo"], valid_pair[f"{m}_rr"])
                         except ValueError:
                             stat_w, p_w = np.nan, np.nan
                             
@@ -117,7 +119,7 @@ def main():
                         "scenario": scenario,
                         "metric": m,
                         "comparison": "PPO vs RR",
-                        "n_pairs": len(merged),
+                        "n_pairs": len(valid_pair),
                         "t_stat": stat_t,
                         "p_value_ttest": p_t,
                         "w_stat": stat_w,
